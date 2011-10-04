@@ -1,0 +1,26 @@
+diff -urpN ConsoleKit-0.4.2/tools/ck-collect-session-info.c ConsoleKit-0.4.2.patched/tools/ck-collect-session-info.c
+--- ConsoleKit-0.4.2/tools/ck-collect-session-info.c	2010-09-03 21:54:31.000000000 +0800
++++ ConsoleKit-0.4.2.patched/tools/ck-collect-session-info.c	2010-11-10 16:43:13.069061526 +0800
+@@ -274,6 +274,8 @@ fill_x11_info (SessionInfo *si)
+         si->x11_display_device = ck_process_stat_get_tty (xorg_stat);
+         ck_process_stat_free (xorg_stat);
+ 
++	 si->is_local = TRUE;
++	 si->is_local_is_set = TRUE;
+         /* don't set is-local here - let the daemon do that */
+ 
+         g_free (si->remote_host_name);
+@@ -303,6 +305,13 @@ fill_session_info (SessionInfo *si)
+ 
+         fill_x11_info (si);
+ 
++        if (! si->is_local_is_set) {
++                /* FIXME: how should we set this? */
++                /* non x11 sessions must be local I guess */
++                si->is_local = TRUE;
++                si->is_local_is_set = TRUE;
++        }
++
+         res = ck_unix_pid_get_login_session_id (si->pid, &si->login_session_id);
+         if (! res) {
+                 si->login_session_id = NULL;

@@ -1,0 +1,14 @@
+Index: ConsoleKit-0.3.1/data/ConsoleKit.conf
+===================================================================
+--- ConsoleKit-0.3.1.orig/data/ConsoleKit.conf
++++ ConsoleKit-0.3.1/data/ConsoleKit.conf
+@@ -41,6 +41,9 @@
+            send_member="OpenSession"/>
+     <allow send_destination="org.freedesktop.ConsoleKit"
+            send_interface="org.freedesktop.ConsoleKit.Manager"
++           send_member="OpenSessionWithParameters"/>
++    <allow send_destination="org.freedesktop.ConsoleKit"
++           send_interface="org.freedesktop.ConsoleKit.Manager"
+            send_member="CloseSession"/>
+     <allow send_destination="org.freedesktop.ConsoleKit"
+            send_interface="org.freedesktop.ConsoleKit.Manager"
